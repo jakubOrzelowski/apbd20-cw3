@@ -12,20 +12,36 @@ public abstract class Container : IContainer
     public double ConDeep { get; set; }
     public string SeriesNumber { get; set; }
     public double MaxWeighOfCargo { get; set; }
-    public int ID { get; set; }
-    private int NextID = 0;
+    public ContainerType Type { get; set; }
+    public int Id { get; set; }
+    private int NextID = 1;
 
-    protected Container(double conHeight, double conWeigh, double conDeep, double maxWeighOfCargo,ContainerType e)
+    protected Container(double conHeight, double conWeigh, double conDeep, double maxWeighOfCargo,ContainerType type)
     {
         ConHeight = conHeight;
         ConWeigh = conWeigh;
         ConDeep = conDeep;
         MaxWeighOfCargo = maxWeighOfCargo;
-        Unload();
-        // if(e.Equals(ContainerType.Liquid))
+        Type = type;
+        CargoWeigh = 0;
+        Id = NextID;
+        if (type.Equals(ContainerType.Liquid))
+        {
+            SeriesNumber = "KON-" + "L-" + Id;
+        }
+        if (type.Equals(ContainerType.Gas))
+        {
+            SeriesNumber = "KON-" + "G-" + Id;
+        }
+        if (type.Equals(ContainerType.Cooling))
+        {
+            SeriesNumber = "KON-" + "L-" + Id;
+        }
+        NextID++;
+
     }
 
-    public void Unload()
+    public virtual void Unload()
     {
         CargoWeigh = 0;
     }
@@ -34,7 +50,7 @@ public abstract class Container : IContainer
     {
         if (cargoWeigh > MaxWeighOfCargo)
         {
-            throw new OverfillException();
+            throw new OverfillException("Nie dozwolona masa cargo. kontener nie zaladowany");
         }
         else
         {
