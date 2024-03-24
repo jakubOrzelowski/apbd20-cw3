@@ -25,20 +25,7 @@ public abstract class Container : IContainer
         Type = type;
         CargoWeigh = 0;
         Id = NextID;
-        if (type.Equals(ContainerType.Liquid))
-        {
-            SeriesNumber = "KON-" + "L-" + Id;
-        }
-        if (type.Equals(ContainerType.Gas))
-        {
-            SeriesNumber = "KON-" + "G-" + Id;
-        }
-        if (type.Equals(ContainerType.Cooling))
-        {
-            SeriesNumber = "KON-" + "L-" + Id;
-        }
         NextID++;
-
     }
 
     public virtual void Unload()
@@ -56,5 +43,10 @@ public abstract class Container : IContainer
         {
             CargoWeigh = cargoWeigh;
         }
+    }
+
+    public override string ToString()
+    {
+        return $"{nameof(CargoWeigh)}: {CargoWeigh}, {nameof(ConHeight)}: {ConHeight}, {nameof(ConWeigh)}: {ConWeigh}, {nameof(ConDeep)}: {ConDeep}, {nameof(SeriesNumber)}: {SeriesNumber}, {nameof(MaxWeighOfCargo)}: {MaxWeighOfCargo}, {nameof(Type)}: {Type}";
     }
 }

@@ -40,6 +40,11 @@ public class LiquidContainer : Container,IHazardNotifier
 
     public void NotifyDanger(string seriesNumber)
     {
-        Console.WriteLine("Na konterner o numerze " + seriesNumber + "zostala podjeta proba zaladowania niedozwolonej wagi towaru ");
+        Console.WriteLine("Na konterner o numerze " + seriesNumber + " zostala podjeta proba zaladowania niedozwolonej wagi towaru ");
+    }
+
+    public override string ToString()
+    {
+        return $"{base.ToString()}, {nameof(IsCargoDanger)}: {IsCargoDanger}";
     }
 }

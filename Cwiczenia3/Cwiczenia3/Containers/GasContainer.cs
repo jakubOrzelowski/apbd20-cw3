@@ -7,7 +7,7 @@ namespace Cwiczenia3.Containers;
 public class GasContainer : Container,IHazardNotifier
 {
     public int Pressure { get; set; }
-    public int NextID { get; set; }
+    public int NextID = 1;
 
 
     public GasContainer(double conHeight, double conWeigh, double conDeep, double maxWeighOfCargo, ContainerType type, int pressure) : base(conHeight, conWeigh, conDeep, maxWeighOfCargo, type)
@@ -41,5 +41,10 @@ public class GasContainer : Container,IHazardNotifier
     public void NotifyDanger(string seriesNumber)
     {
         Console.WriteLine("Zaszla niebezpieczna sytuacja z kontenerme o numerze: " + seriesNumber);
+    }
+
+    public override string ToString()
+    {
+        return $"{base.ToString()}, {nameof(Pressure)}: {Pressure}";
     }
 }
